@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+    margin: 60px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    background: #7D74EC;
+    justify-items: center;
+    align-items: center;
+    height: 100vh;
+
+}
+
+.container {
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    background: white;
+    border-radius: 20px;
+    border-color: white;
+}
+
+
+.btn {
+    font-size: 30px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 40px;
+    background: blue;
+    color: white;
+    margin-top: 10px;
+
+}
+
+
+h3 {
+    font-size: 30px;
+}
+/* Media query for mobile devices */
+@media (max-width: 600px) {
+    .container {
+        padding: 16px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    p {
+        font-size: 14px;
+    }
+
+    .btn {
+        font-size: 24px;
+        padding: 8px 32px;
+    }
+}
+</style>
+</head>
+<body>
+    <section class="landing-page">
+        <div class="container">
+         <h1>Quick Quiz</h1>
+            <p>Test your knowledge in Web Basics</p>
+            <div class="image-block">
+                <img src="image 1.jpg" alt="">
+            </div>
+            <button class="btn">Start Quiz</button>
+        </div>
+    </section>
+    
+</body>
+</html>
