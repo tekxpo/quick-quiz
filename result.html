@@ -1,209 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 130px 0 0px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: blue;
-            justify-items: center;
-            align-items: center;
-            height: 100vh;
+  <meta charset="UTF-8">
+  <title>Quiz Completed</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: inter, Arial, sans-serif;
+      background-color: #a259ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
 
-        }
+    .container {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px 70px;
+      max-width: 700px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
 
+    h2 {
+      margin: 0;
+      font-size: 50px;
+      font-weight: bold;
+    }
+
+    p.subtitle {
+      margin-top: 8px;
+      font-size: 32px;
+      color: #333;
+    }
+
+    .trophy img {
+      width: 200px;
+      height: 170px;
+      margin: 10px 0;
+    }
+
+    .score {
+      font-size: 46px;
+      font-weight: semi-bold;
+      margin-bottom: 5px;
+    }
+
+    .message {
+      font-size: 32px;
+      margin-bottom: 40px;
+      color: #333;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .buttons button {
+      padding: 10px 20px;
+      font-size: 38px;
+      border-radius: 16px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.3s, color 0.3s;
+      margin-bottom: 30px;
+    }
+
+    .restart {
+      background-color: #2780FC;
+      color: white;
+    }
+
+    .go-home {
+      background-color: #e0e0e0;
+      color: black;
+    }
+
+    .restart:hover {
+      background-color: #1976d2;
+    }
+
+    .go-home:hover {
+      background-color: #bdbdbd;
+    }
+
+    @media (max-width: 900px) {
         .container {
-            max-width: 500px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 50px;
-            background: white;
-            border-radius: 20px;
-            border-color: white;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            gap: 5px;
-
+            width: 70%;
+            padding: 30px;
         }
-
-        .question-tab {
-            flex-direction: column;
-            gap: 20px;
-            justify-content: center;
-
-            
-        }
-
-        .answer-field {
-            font-size: 32px;
-            margin-bottom: 10px;
-            border-radius: 12px;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            width: 100%;
-            
-        }
-
-        .answer-field:focus {
-            outline: none;
-            box-shadow: 0 0 5px blue;}
-
-        .answer-field:hover {
-            background: blue;
-            color: white;
-        }
-
-        .btn {
-            font-size: 30px;
-            border-radius: 10px;
-            border: none;
-            padding: 10px 40px;
-            background: blue;
-            color: white;
-            margin-top: 10px;
-
-        }
-
-        .btn2 {
-            font-size: 30px;
-            border-radius: 10px;
-            border: none;
-            padding: 10px 40px;
-            background: #CFDBED;
-            color: white;
-            margin-top: 10px;
-
-        }
-
-        .btn:hover {
-            color: black;
-            background: lightgray;
-        }
-
-        .btn-wrapper {
-            display: flex;
-            flex-direction: row;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .divider {
-            height: 4px;
-            width: 200px;
-            background: blue;
-            border-radius: 20px;
-        }
-
-        h3 {
-            font-size: 38px;
-            width: 90%;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        p {
-            font-size: 26px;
-            text-align: center;
-            font-weight: 400;}
-
-        h1 {
-            font-size: 50px;
-            text-align: center;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
         h2 {
-            font-size: 44px;
-            text-align: center;
-            font-weight: 600;
+            font-size: 36px;
+        }
+        p.subtitle {
+            font-size: 24px;
+        }
+        .trophy img {
+            width: 150px;
+            height: 120px;
+        }
+        .score {
+            font-size: 32px;
+        }
+        .message {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .buttons button {
+            font-size: 24px;
+            padding: 8px 16px;
             margin-bottom: 20px;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 600px) {
             .container {
-                max-width: 70%;
+                width: 90%;
                 padding: 30px;
             }
-            .answer-field {
-                font-size: 24px;
+            h2 {
+                font-size: 28px;
             }
-
-            .question-tab {
-                gap: 10px;
-            }
-
-            .btn {
-                font-size: 24px;
-                padding: 8px 20px;
-            }
-
-            .divider {
-                width: 150px;
-            }
-
-            h3 {
-                font-size: 24px;
-            }
-
-            p {
-                font-size: 20px;
-            }
-        }
-
-        @media (max-width: 600px){
-            .container {
-                max-width: 90%;
-                padding: 30px;
-            }
-            .answer-field {
-                font-size: 20px;
-            }
-
-            .question-tab {
-                gap: 5px;
-            }
-
-            .btn {
-                font-size: 20px;
-                padding: 10px 20px;
-            }
-
-            .divider {
-                width: 100px;
-            }
-
-            h3 {
-                font-size: 20px;
-            }
-
-            p {
+            p.subtitle {
                 font-size: 18px;
             }
+            .trophy img {
+                width: 120px;
+                height: 100px;
+            }
+            .score {
+                font-size: 24px;
+            }
+            .message {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+            .buttons button {
+                font-size: 18px;
+                padding: 6px 12px;
+                margin-bottom: 15px;
+            }
         }
-        </style>
+    }
+  </style>
 </head>
 <body>
-        <div class="container">
-            <h1>Quick Completed</h1>
-            <p>Test your knowledge in Web Basics!</p>
-            <div class="image-block">
-                <img src="images/cup.webp" width="200px" height="170px" alt="trophy">
-            </div>
-            <h2>Your Score: 4/5</h3>
-            <p>Great Job! You’re improving fast.</p>
-            <div class="btn-wrapper">
-                <button class="btn">Restart Quiz</button>
-                <button class="btn2">Go Home</button>
-            </div>
-        </div>
-    
+  <div class="container">
+    <h2>Quiz Completed</h2>
+    <p class="subtitle">Test your knowledge in Web Basics!</p>
+    <div class="trophy"><img src="images/cup.webp" alt=""></div>
+    <div class="score">Your Score: 4/5</div>
+    <div class="message">Great Job! You’re improving fast.</div>
+    <div class="buttons">
+      <button class="restart">Restart Quiz</button>
+      <button class="go-home">Go Home</button>
+    </div>
+  </div>
 </body>
 </html>
