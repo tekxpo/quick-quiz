@@ -148,16 +148,42 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <h2>Quiz Completed</h2>
-    <p class="subtitle">Test your knowledge in Web Basics!</p>
-    <div class="trophy"><img src="images/cup.webp" alt=""></div>
-    <div class="score">Your Score: 4/5</div>
-    <div class="message">Great Job! You’re improving fast.</div>
-    <div class="buttons">
-      <button class="restart">Restart Quiz</button>
-      <button class="go-home">Go Home</button>
+    <div class="container">
+        <h2>Quiz Completed</h2>
+        <p class="subtitle">Test your knowledge in Web Basics!</p>
+        <div class="trophy"><img src="images/cup.webp" alt="Trophy"></div>
+        <div class="score" id="score-text">Your Score: 0/0</div>
+        <div class="message" id="message">You're improving fast!</div>
+        <div class="buttons">
+        <button class="restart" onclick="restartQuiz()">Restart Quiz</button>
+        <button class="go-home" onclick="window.location.href='question.html'">Go Home</button>
+        </div>
     </div>
-  </div>
+  <script>
+        const score = parseInt(localStorage.getItem("quizScore") || 0);
+        const total = parseInt(localStorage.getItem("totalQuestions") || 0);
+
+        const scoreText = document.getElementById("score-text");
+        const message = document.getElementById("message");
+
+        scoreText.textContent = `Your Score: ${score}/${total}`;
+
+        if (score === total) {
+        message.textContent = "🎉 Perfect Score! You're a web wizard!";
+        } else if (score >= total * 0.8) {
+        message.textContent = "👏 Great Job! You're improving fast.";
+        } else if (score >= total * 0.5) {
+        message.textContent = "💡 Not bad! Keep learning.";
+        } else {
+        message.textContent = "📘 Don't worry, try again!";
+        }
+
+        function restartQuiz() {
+        localStorage.removeItem("quizScore");
+        localStorage.removeItem("totalQuestions");
+        window.location.href = "question.html"; // Ensure this path matches your setup
+        }
+    </script>
+  
 </body>
 </html>

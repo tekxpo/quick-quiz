@@ -72,6 +72,11 @@
         color: white;
     }
 
+    .option.selected {
+          background-color: #3b82f6;
+          color: white;
+    }
+
     .next-button {
       margin-top: 10px;
       padding: 10px 50px;
@@ -158,16 +163,105 @@
 </head>
 <body>
   <div class="container">
-    <div class="question-number">Question 2 of 5</div>
-    <div class="progress-bar"></div>
-    <div class="question-text">What does HTML stand<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;for?</div>
+    <div class="question-number" id="question-number">Question 1 of 5</div>
+    <div class="progress-bar" id="progress-bar"></div>
+    <div class="question-text" id="question-text">Loading...</div>
 
-    <div class="option">Hyper Text Mark up language</div>
-    <div class="option">Home Tool MarkUp language</div>
-    <div class="option">HighText Machine language</div>
-    <div class="option">None of the above</div>
+    <div id="options-container"></div>
 
-    <button class="next-button">Next</button>
+    <button class="next-button" id="next-button">Next</button>
+
   </div>
+  <script>
+    const questions = [
+      {
+        text: "What does HTML stand for?",
+        options: [
+          "Hyper Text Mark up language",
+          "Home Tool MarkUp language",
+          "HighText Machine language",
+          "None of the above"
+        ],
+        correct: 0
+      },
+      {
+        text: "What does CSS stand for?",
+        options: [
+          "Creative Style Sheets",
+          "Cascading Style Sheets",
+          "Colorful Style Sheets",
+          "Computer Style Sheets"
+        ],
+        correct: 1
+      },
+      {
+        text: "Which tag is used for inserting an image in HTML?",
+        options: ["<img>", "<image>", "<src>", "<pic>"],
+        correct: 0
+      },
+      {
+        text: "Which HTML element contains JavaScript?",
+        options: ["<js>", "<script>", "<javascript>", "<code>"],
+        correct: 1
+      },
+      {
+        text: "Which attribute is used to link CSS to HTML?",
+        options: ["src", "rel", "style", "href"],
+        correct: 3
+      }
+    ];
+
+    let current = 0;
+    let score = 0;
+    let selected = null;
+
+    const questionNumber = document.getElementById("question-number");
+    const questionText = document.getElementById("question-text");
+    const optionsContainer = document.getElementById("options-container");
+    const progressBar = document.getElementById("progress-bar");
+    const nextButton = document.getElementById("next-button");
+
+    function loadQuestion() {
+      const q = questions[current];
+      questionNumber.textContent = `Question ${current + 1} of ${questions.length}`;
+      questionText.innerHTML = q.text;
+      progressBar.style.width = `${(current / questions.length) * 100}%`;
+
+      optionsContainer.innerHTML = "";
+
+      q.options.forEach((option, index) => {
+        const div = document.createElement("div");
+        div.classList.add("option");
+        div.textContent = option;
+        div.addEventListener("click", () => {
+          document.querySelectorAll(".option").forEach(o => o.classList.remove("selected"));
+          div.classList.add("selected");
+          selected = index;
+        });
+        optionsContainer.appendChild(div);
+      });
+    }
+
+    nextButton.addEventListener("click", () => {
+      if (selected === null) return;
+      if (selected === questions[current].correct) {
+        score++;
+      }
+
+      selected = null;
+      current++;
+
+      if (current < questions.length) {
+        loadQuestion();
+      } else {
+        // Save score and redirect to completed page
+        localStorage.setItem("quizScore", score);
+        localStorage.setItem("totalQuestions", questions.length);
+        window.location.href = "result.html"; // Make sure path is correct
+      }
+    });
+
+    loadQuestion();
+  </script>
 </body>
 </html>
