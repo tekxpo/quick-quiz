@@ -1,208 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 130px 0 0px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: blue;
-            justify-items: center;
-            align-items: center;
-            height: 100vh;
+  <meta charset="UTF-8">
+  <title>Quiz Question</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to top right, #2e005c, #0072ff);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
+    .container {
+      background-color: white;
+      border-radius: 10px;
+      padding: 30px;
+      width: 700px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    .question-number {
+      font-size: 26px;
+      color: black;
+      margin-bottom: 10px;
+    }
+
+    .progress-bar {
+      height: 4px;
+      width: 50%;
+      background: linear-gradient(to right, #0077ff, #ffffff);
+      border-radius: 20px;
+      margin: 10px auto 20px auto;
+      animation: progressAnimation 2s forwards;
+      
+    }
+    .question-text {
+      font-size: 38px;
+      font-weight: medium;
+      margin-bottom: 20px;
+      
+    }
+
+    .option {
+      width: 80%;
+      justify-content: center;
+      background-color: #e0e0e0;
+      padding: 15px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 32px;
+      font-weight: medium;
+      transition: background-color 0.3s, color 0.3s;
+      margin: 0px auto 15px auto;
+      cursor: pointer;
+    }
+
+    .option:focus {
+        outline: none;
+        box-shadow: 0 0 5px #2780FC;
+    }
+
+    .option:hover {
+        background: #2780FC;
+        color: white;
+    }
+
+    .option.selected {
+          background-color: #3b82f6;
+          color: white;
+    }
+
+    .next-button {
+      margin-top: 10px;
+      padding: 10px 50px;
+      background-color: #2780FC;
+      color: white;
+      border: none;
+      border-radius: 16px;
+      cursor: pointer;
+      font-size: 38px;
+      font-weight: medium;
+    }
+
+    .next-button:hover {
+      background-color: #357ABD;
+    }
+
+    @media (max-width: 900px) {
+        .container {
+            max-width: 70%;
+            padding: 30px;
+        }
+        .option {
+            font-size: 24px;
         }
 
-        .container {
-            max-width: 500px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 50px;
-            background: white;
-            border-radius: 20px;
-            border-color: white;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-            gap: 5px;
+        .next-button {
+            font-size: 24px;
+            padding: 8px 20px;
+        }
 
+        .progress-bar {
+            width: 150px;
+        }
+
+        .question-paragraph {
+            font-size: 24px;
+        }
+
+        .question-number {
+            font-size: 20px;
+        }
+
+        .question-text {
+            font-size: 28px;
+        }
+    }
+
+    @media (max-width: 600px){
+        .container {
+            max-width: 90%;
+            padding: 30px;
+        }
+        .option {
+            font-size: 20px;
         }
 
         .question-tab {
-            flex-direction: column;
-            gap: 20px;
-            justify-content: center;
-
-            
+            gap: 5px;
         }
 
-        .answer-field {
-            font-size: 32px;
-            margin-bottom: 10px;
-            border-radius: 12px;
-            border: none;
+        .next-button {
+            font-size: 20px;
             padding: 10px 20px;
-            cursor: pointer;
-            width: 100%;
-            
         }
 
-        .answer-field:focus {
-            outline: none;
-            box-shadow: 0 0 5px blue;}
-
-        .answer-field:hover {
-            background: blue;
-            color: white;
+        .progress-bar {
+            width: 100px;
         }
 
-        .btn {
-            font-size: 30px;
-            border-radius: 10px;
-            border: none;
-            padding: 10px 40px;
-            background: blue;
-            color: white;
-            margin-top: 10px;
-
+        .question-paragraph {
+            font-size: 20px;
         }
 
-        .btn2 {
-            font-size: 30px;
-            border-radius: 10px;
-            border: none;
-            padding: 10px 40px;
-            background: #CFDBED;
-            color: white;
-            margin-top: 10px;
-
+        .question-number {
+            font-size: 18px;
         }
 
-        .btn:hover {
-            color: black;
-            background: lightgray;
+        .question-text {
+            font-size: 24px;
         }
+    }
 
-        .btn-wrapper {
-            display: flex;
-            flex-direction: row;
-            gap: 20px;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .divider {
-            height: 4px;
-            width: 200px;
-            background: blue;
-            border-radius: 20px;
-        }
-
-        h3 {
-            font-size: 38px;
-            width: 90%;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        p {
-            font-size: 26px;
-            text-align: center;
-            font-weight: 400;}
-
-        h1 {
-            font-size: 50px;
-            text-align: center;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        h2 {
-            font-size: 44px;
-            text-align: center;
-            font-weight: 600;
-            margin-bottom: 20px;
-        }
-
-        @media (max-width: 900px) {
-            .container {
-                max-width: 70%;
-                padding: 30px;
-            }
-            .answer-field {
-                font-size: 24px;
-            }
-
-            .question-tab {
-                gap: 10px;
-            }
-
-            .btn {
-                font-size: 24px;
-                padding: 8px 20px;
-            }
-
-            .divider {
-                width: 150px;
-            }
-
-            h3 {
-                font-size: 24px;
-            }
-
-            p {
-                font-size: 20px;
-            }
-        }
-
-        @media (max-width: 600px){
-            .container {
-                max-width: 90%;
-                padding: 30px;
-            }
-            .answer-field {
-                font-size: 20px;
-            }
-
-            .question-tab {
-                gap: 5px;
-            }
-
-            .btn {
-                font-size: 20px;
-                padding: 10px 20px;
-            }
-
-            .divider {
-                width: 100px;
-            }
-
-            h3 {
-                font-size: 20px;
-            }
-
-            p {
-                font-size: 18px;
-            }
-        }
-    </style>
+  </style>
 </head>
 <body>
-        <div class="container">
-            <p>Question 2 of 5</p>
-            <div class="divider"></div>
-            <h3>What does HTML stand for?</h3>
-            <div class="question-tab">
-                <button class="answer-field">Hyper Text Mark up language</button>
-                <button class="answer-field">Hyper Tool Mark up language</button>
-                <button class="answer-field">HyperText Machine language</button>
-                <button class="answer-field">None of the above</button>
-            </div>
-            <button class="btn">Next</button>
-        </div>
-    
+  <div class="container">
+    <div class="question-number" id="question-number">Question 1 of 5</div>
+    <div class="progress-bar" id="progress-bar"></div>
+    <div class="question-text" id="question-text">Loading...</div>
+
+    <div id="options-container"></div>
+
+    <button class="next-button" id="next-button">Next</button>
+
+  </div>
+  <script>
+    const questions = [
+      {
+        text: "What does HTML stand for?",
+        options: [
+          "Hyper Text Mark up language",
+          "Home Tool MarkUp language",
+          "HighText Machine language",
+          "None of the above"
+        ],
+        correct: 0
+      },
+      {
+        text: "What does CSS stand for?",
+        options: [
+          "Creative Style Sheets",
+          "Cascading Style Sheets",
+          "Colorful Style Sheets",
+          "Computer Style Sheets"
+        ],
+        correct: 1
+      },
+      {
+        text: "Which tag is used for inserting an image in HTML?",
+        options: ["<img>", "<image>", "<src>", "<pic>"],
+        correct: 0
+      },
+      {
+        text: "Which HTML element contains JavaScript?",
+        options: ["<js>", "<script>", "<javascript>", "<code>"],
+        correct: 1
+      },
+      {
+        text: "Which attribute is used to link CSS to HTML?",
+        options: ["src", "rel", "style", "href"],
+        correct: 3
+      }
+    ];
+
+    let current = 0;
+    let score = 0;
+    let selected = null;
+
+    const questionNumber = document.getElementById("question-number");
+    const questionText = document.getElementById("question-text");
+    const optionsContainer = document.getElementById("options-container");
+    const progressBar = document.getElementById("progress-bar");
+    const nextButton = document.getElementById("next-button");
+
+    function loadQuestion() {
+      const q = questions[current];
+      questionNumber.textContent = Question ${current + 1} of ${questions.length};
+      questionText.innerHTML = q.text;
+      progressBar.style.width = ${(current / questions.length) * 100}%;
+
+      optionsContainer.innerHTML = "";
+
+      q.options.forEach((option, index) => {
+        const div = document.createElement("div");
+        div.classList.add("option");
+        div.textContent = option;
+        div.addEventListener("click", () => {
+          document.querySelectorAll(".option").forEach(o => o.classList.remove("selected"));
+          div.classList.add("selected");
+          selected = index;
+        });
+        optionsContainer.appendChild(div);
+      });
+    }
+
+    nextButton.addEventListener("click", () => {
+      if (selected === null) return;
+      if (selected === questions[current].correct) {
+        score++;
+      }
+
+      selected = null;
+      current++;
+
+      if (current < questions.length) {
+        loadQuestion();
+      } else {
+        // Save score and redirect to completed page
+        localStorage.setItem("quizScore", score);
+        localStorage.setItem("totalQuestions", questions.length);
+        window.location.href = "result.html"; // Make sure path is correct
+      }
+    });
+
+    loadQuestion();
+  </script>
 </body>
 </html>
