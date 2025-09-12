@@ -223,9 +223,9 @@
 
     function loadQuestion() {
       const q = questions[current];
-      questionNumber.textContent = Question ${current + 1} of ${questions.length};
+      questionNumber.textContent = `Question ${current + 1} of ${questions.length}`;
       questionText.innerHTML = q.text;
-      progressBar.style.width = ${(current / questions.length) * 100}%;
+      progressBar.style.width = `${(current / questions.length) * 100}%`;
 
       optionsContainer.innerHTML = "";
 
