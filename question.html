@@ -169,7 +169,7 @@
 
     <div id="options-container"></div>
 
-    <button class="next-button" id="next-button">Next</button>
+    
 
   </div>
   <script>
@@ -225,41 +225,57 @@
       const q = questions[current];
       questionNumber.textContent = `Question ${current + 1} of ${questions.length}`;
       questionText.innerHTML = q.text;
-      progressBar.style.width = `${(current / questions.length) * 100}%`;
+      progressBar.style.width = `${((current) / questions.length) * 100}%`;
 
       optionsContainer.innerHTML = "";
+      selected = null;
 
       q.options.forEach((option, index) => {
         const div = document.createElement("div");
         div.classList.add("option");
         div.textContent = option;
+
         div.addEventListener("click", () => {
-          document.querySelectorAll(".option").forEach(o => o.classList.remove("selected"));
-          div.classList.add("selected");
-          selected = index;
+        if (selected !== null) return; // prevent multiple selections
+        selected = index;
+
+        const correctIndex = q.correct;
+        const allOptions = document.querySelectorAll(".option");
+
+        allOptions.forEach((opt, i) => {
+          opt.classList.remove("selected");
+          if (i === correctIndex) {
+            opt.style.backgroundColor = "#2780FC"; // blue
+            opt.style.color = "white";
+          }
+
+          if (i === selected && selected !== correctIndex) {
+            opt.style.backgroundColor = "#f44336"; // red
+            opt.style.color = "white";
+          }
+
+          opt.style.pointerEvents = "none"; // disable further clicks
         });
-        optionsContainer.appendChild(div);
-      });
-    }
 
-    nextButton.addEventListener("click", () => {
-      if (selected === null) return;
-      if (selected === questions[current].correct) {
-        score++;
-      }
+        if (selected === correctIndex) {
+          score++;
+        }
 
-      selected = null;
-      current++;
-
-      if (current < questions.length) {
-        loadQuestion();
-      } else {
-        // Save score and redirect to completed page
-        localStorage.setItem("quizScore", score);
-        localStorage.setItem("totalQuestions", questions.length);
-        window.location.href = "result.html"; // Make sure path is correct
-      }
+      setTimeout(() => {
+        current++;
+        if (current < questions.length) {
+          loadQuestion();
+        } else {
+          localStorage.setItem("quizScore", score);
+          localStorage.setItem("totalQuestions", questions.length);
+          window.location.href = "result.html";
+        }
+      }, 1000); // delay for showing color feedback
     });
+
+    optionsContainer.appendChild(div);
+  });
+}
 
     loadQuestion();
   </script>
